@@ -1,0 +1,24 @@
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  ethernets:
+    enp1s0:
+      dhcp4: true
+      routes:
+        - to: 192.168.0.0/24
+#          from: 192.168.0.10
+          scope: link
+          table: 100
+        - to: 0.0.0.0/0
+          via: 192.168.0.1
+#          from: 192.168.0.1
+          table: 100
+        - to: 192.168.0.1
+          scope: link
+#          from: 192.168.0.10
+          metric: 100
+          table: 100
+      routing-policy:
+        - from: 0.0.0.0/0
+          mark: 1
+          table: 100
